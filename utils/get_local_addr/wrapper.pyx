@@ -12,6 +12,12 @@ cdef extern from "utils.h":
 MAX_TRY = 16
 
 def get_local_addrs(iface=[], prefix=[], try_max=MAX_TRY):
+    """ Get local ipv4 addresses
+    get_local_addrs(iface=[], prefix=[], try_max=MAX_TRY) -> [ip_addrs]
+    iface -- get addresses filter from target network interface (eg: iface=["eth0"])
+    prefix -- get addresses start with @prefix (eg: prefix=["10.0"])
+    try_max -- try loop maximum @try_max local ip address, default MAX_TRY
+    """
     cdef iface_addr *addrs = <iface_addr *>malloc(sizeof(iface_addr) * try_max)
     if addrs == NULL:
         raise MemoryError("Unable allocate address buffer")
